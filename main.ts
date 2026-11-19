@@ -19,7 +19,7 @@
 
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { byteLength } from 'node:buffer';
+import { Buffer } from 'node:buffer';
 
 const INPUT_DIR = process.env.MAKEFUN_INPUT_DIR ?? '/input';
 const OUTPUT_DIR = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
@@ -380,7 +380,7 @@ function baselineRows(c: Case): Array<{ id: number; q: number[] }> {
 }
 
 function validateOut(c: Case, text: string): boolean {
-  if (byteLength(text, 'utf8') > MAX_OUT_BYTES) return false;
+  if (Buffer.byteLength(text, 'utf8') > MAX_OUT_BYTES) return false;
   let parsed: unknown;
   try {
     parsed = JSON.parse(text);
